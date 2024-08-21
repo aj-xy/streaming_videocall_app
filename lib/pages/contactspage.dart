@@ -107,7 +107,7 @@ class _contactsState extends State<contacts> {
                     );
                   },
                 ),
-              SizedBox(height: 300,),
+              SizedBox(height: 240,),
               Row(mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(style: IconButton.styleFrom(
@@ -118,7 +118,7 @@ class _contactsState extends State<contacts> {
                     Navigator.push(context, MaterialPageRoute(builder: (context) {
                       return JoinScreen();
                     },));
-                  }, icon: Icon(Icons.add_ic_call_rounded,),iconSize: 30,),
+                  }, icon: Icon(Icons.add_ic_call_rounded,),iconSize: 35,),
                 ],
               ),
               // ElevatedButton(
