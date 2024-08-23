@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:streaming_videocall_app/pages/chatscreen.dart';
 import 'package:streaming_videocall_app/pages/joinscreen.dart';
 
 class contacts extends StatefulWidget {
@@ -9,8 +10,8 @@ class contacts extends StatefulWidget {
 }
 
 class _contactsState extends State<contacts> {
-   final TextEditingController _searchController = TextEditingController();
-   final List<String> _allContacts = [
+  final TextEditingController _searchController = TextEditingController();
+  final List<String> _allContacts = [
     'Alice Johnson',
     'Bob Smith',
     'Charlie Davis',
@@ -61,7 +62,8 @@ class _contactsState extends State<contacts> {
           padding: EdgeInsets.all(20),
           child: Column(
             children: [
-              TextField(  controller: _searchController,
+              TextField(
+                controller: _searchController,
                 style: TextStyle(
                     color: Color.fromRGBO(1, 18, 24, 1),
                     fontWeight: FontWeight.bold),
@@ -78,47 +80,79 @@ class _contactsState extends State<contacts> {
                         borderSide: BorderSide(
                             color: Color.fromRGBO(244, 245, 251, 1)))),
               ),
-              SizedBox(height: 20,),
-               ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: _filteredContacts.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: Color.fromRGBO(5, 66, 112, 1),
-                      child: ListTile(
-                        title: Text(
-                          _filteredContacts[index],
-                          style: TextStyle(
-                            color: Color.fromRGBO(244, 245, 251, 1),
-                            fontWeight: FontWeight.bold,
+              SizedBox(
+                height: 20,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _filteredContacts.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    color: Color.fromRGBO(5, 66, 112, 1),
+                    child: ListTile(
+                      title: Text(
+                        _filteredContacts[index],
+                        style: TextStyle(
+                          color: Color.fromRGBO(244, 245, 251, 1),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      leading: Icon(Icons.account_circle,
+                          color: Color.fromRGBO(244, 245, 251, 1)),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.chat,
+                                color: Color.fromRGBO(244, 245, 251, 1)),
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ChatScreen(
+                                    contactName: _filteredContacts[index]);
+                              }));
+                            },
                           ),
-                        ),
-                        leading: Icon(Icons.account_circle, color: Color.fromRGBO(244, 245, 251, 1)),
-                        trailing: IconButton(
-                          icon: Icon(Icons.phone, color: Color.fromRGBO(244, 245, 251, 1)),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return JoinScreen();
-                            }));
-                          },
-                        ),
-                      ),margin: EdgeInsets.all(10),
-                    );
-                  },
-                ),
-              SizedBox(height: 240,),
-              Row(mainAxisAlignment: MainAxisAlignment.end,
+                          IconButton(
+                            icon: Icon(Icons.phone,
+                                color: Color.fromRGBO(244, 245, 251, 1)),
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return JoinScreen();
+                              }));
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    margin: EdgeInsets.all(10),
+                  );
+                },
+              ),
+              SizedBox(
+                height: 240,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  IconButton(style: IconButton.styleFrom(
-                    backgroundColor:  Color.fromRGBO(5, 66, 112, 1),
-                    foregroundColor:  Color.fromRGBO(244, 245, 251, 1)
-                  ),
+                  IconButton(
+                    style: IconButton.styleFrom(
+                        backgroundColor: Color.fromRGBO(5, 66, 112, 1),
+                        foregroundColor: Color.fromRGBO(244, 245, 251, 1)),
                     onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return JoinScreen();
-                    },));
-                  }, icon: Icon(Icons.add_ic_call_rounded,),iconSize: 35,),
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return JoinScreen();
+                        },
+                      ));
+                    },
+                    icon: Icon(
+                      Icons.add_ic_call_rounded,
+                    ),
+                    iconSize: 35,
+                  ),
                 ],
               ),
               // ElevatedButton(
